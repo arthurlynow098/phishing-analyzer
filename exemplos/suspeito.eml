@@ -1,0 +1,31 @@
+Return-Path: <bounce@mailer-promo.example>
+Authentication-Results: mx.empresa.example;
+ spf=softfail smtp.mailfrom=mailer-promo.example;
+ dkim=none;
+ dmarc=fail header.from=seguranca-conta.example
+From: "Nubank Segurança" <alerta@seguranca-conta.example>
+Reply-To: suporte.cliente.2026@webmail-gratis.example
+To: arthur@empresa.example
+Subject: URGENTE Sua conta foi bloqueada, regularize imediatamente
+Date: Fri, 14 Nov 2026 09:12:44 -0300
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="LIMITE"
+
+--LIMITE
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Prezado cliente,</p>
+<p>Identificamos um acesso incomum e sua conta foi <b>bloqueada</b>.
+Para evitar o cancelamento, confirme seus dados em até 24 horas.</p>
+<p><a href="http://nubank-verificacao-acesso.example/login?id=8812">www.nubank.com.br</a></p>
+<p>Ou acesse pelo link curto https://bit.ly/3xExemplo</p>
+<p>Equipe de Segurança</p>
+</body></html>
+
+--LIMITE
+Content-Type: application/octet-stream
+Content-Disposition: attachment; filename="comprovante.pdf.html"
+
+PGh0bWw+PC9odG1sPg==
+--LIMITE--

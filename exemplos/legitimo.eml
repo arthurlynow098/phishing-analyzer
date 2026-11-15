@@ -1,0 +1,19 @@
+Return-Path: <arthur@empresa.example>
+Authentication-Results: mx.empresa.example;
+ spf=pass smtp.mailfrom=empresa.example;
+ dkim=pass header.d=empresa.example;
+ dmarc=pass header.from=empresa.example
+From: Arthur Entsev <arthur@empresa.example>
+To: equipe@empresa.example
+Subject: Relatório semanal do projeto
+Date: Fri, 14 Nov 2026 17:40:02 -0300
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Oi pessoal,
+
+O relatório da semana está no link abaixo.
+https://empresa.example/relatorios/semana-46
+
+Qualquer dúvida me chamem.
+Arthur
