@@ -1,27 +1,29 @@
-<a id="top"></a>
+<p align="center"><sub>Phishing Analyzer</sub></p>
 
-<p align="center"><img src="assets/banner.svg" alt="Phishing Analyzer" width="100%"></p>
+---
 
 <p align="center">
-<img alt="Python" src="https://img.shields.io/badge/Python-3.10+-F97316?style=for-the-badge&logo=python&logoColor=white">
-<img alt="Blue Team" src="https://img.shields.io/badge/blue%20team-an%C3%A1lise%20de%20e--mail-242424?style=for-the-badge">
-<a href="https://github.com/arthurlynow098/phishing-analyzer/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/phishing-analyzer/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
-<img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-242424?style=for-the-badge">
+  <img src="assets/banner.png" alt="Phishing Analyzer" width="100%">
 </p>
 
-<p align="center"><a href="#sobre">Sobre</a> &nbsp;&nbsp; <a href="#como-funciona">Como funciona</a> &nbsp;&nbsp; <a href="#rodando">Rodando</a> &nbsp;&nbsp; <a href="#aprendi">O que aprendi</a> &nbsp;&nbsp; <a href="#estudos">Estudos</a></p>
+<p align="center">
+  Analisa e-mails .eml e pontua SPF, DKIM, DMARC, links disfarçados e anexos perigosos
+</p>
 
-<a id="sobre"></a>
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.10+-F97316?style=for-the-badge&logo=python&logoColor=white">
+  <img alt="Blue Team" src="https://img.shields.io/badge/blue%20team-an%C3%A1lise%20de%20e--mail-242424?style=for-the-badge">
+  <a href="https://github.com/arthurlynow098/phishing-analyzer/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/phishing-analyzer/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
+  <img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-242424?style=for-the-badge">
+</p>
 
-<p><img src="assets/secao-01.svg" alt="Sobre o projeto" width="100%"></p>
+## Sobre o projeto
 
 Phishing ainda é a porta de entrada mais comum de ataque. Todo mundo já recebeu o "sua conta foi bloqueada, clique aqui". Num SOC, alguém precisa olhar o e-mail que o usuário reportou e decidir rápido se é golpe ou não.
 
 O Phishing Analyzer faz essa triagem inicial. Você passa o arquivo `.eml` (no Outlook e no Gmail dá para baixar a mensagem original) e ele lê os cabeçalhos, os links e os anexos **sem abrir nada**, soma os sinais suspeitos e devolve uma nota de 0 a 100.
 
-<a id="como-funciona"></a>
-
-<p><img src="assets/secao-02.svg" alt="Como funciona" width="100%"></p>
+## Como funciona
 
 ```mermaid
 flowchart LR
@@ -34,26 +36,16 @@ flowchart LR
     E & F & G --> H[Nota de risco]
 ```
 
-| O que é checado | Por que importa |
-|---|---|
-| **SPF, DKIM e DMARC** | Mostram se o servidor que mandou tinha autorização para usar aquele domínio |
-| **Reply-To diferente** | O golpista manda de um endereço e quer a resposta em outro |
-| **Nome de exibição** | "Nubank Segurança" escrito no nome, mas o endereço é de outro domínio |
-| **Texto do link x destino** | O link mostra `www.nubank.com.br` mas abre outro site. É o truque mais clássico |
-| **Domínio com nome de marca** | `nubank-verificacao.xyz` não é do Nubank |
-| **IP, encurtador e punycode** | Formas de esconder para onde o link vai |
-| **Anexo** | `.html`, `.exe`, `.iso` e extensão dupla como `comprovante.pdf.html` |
-| **Urgência** | "bloqueada", "regularize imediatamente", pressão para a pessoa não pensar |
+## Tecnologias
 
-Detalhes que fiz de propósito
+<p>
+  <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white">
+  <img alt="SPF" src="https://img.shields.io/badge/SPF-2B2B2B?style=flat-square">
+  <img alt="DKIM" src="https://img.shields.io/badge/DKIM-2B2B2B?style=flat-square">
+  <img alt="DMARC" src="https://img.shields.io/badge/DMARC-2B2B2B?style=flat-square">
+</p>
 
-- Os links saem no relatório como `hxxp://` (defang), assim ninguém clica sem querer copiando do terminal
-- Uso só a biblioteca padrão (`email` e `html.parser`), nada é renderizado e nenhum link é acessado
-- Código de saída 1 quando a nota passa de 60, para dar para automatizar numa caixa de "reportar phishing"
-
-<a id="rodando"></a>
-
-<p><img src="assets/secao-03.svg" alt="Rodando na sua máquina" width="100%"></p>
+## Executando o código
 
 Só precisa de Python 3.10 ou mais novo. Tem dois e-mails de exemplo em `exemplos/`, um golpe e um legítimo, ambos com domínios `.example` que não existem.
 
@@ -72,7 +64,7 @@ pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-<p><img src="assets/secao-04.svg" alt="Exemplo de saída" width="100%"></p>
+## Exemplo
 
 ```text
   arquivo   exemplos/suspeito.eml
@@ -100,25 +92,7 @@ python -m pytest -q
 
 O e-mail legítimo do exemplo, com SPF, DKIM e DMARC passando, recebe nota 0.
 
-<a id="aprendi"></a>
-
-<p><img src="assets/secao-05.svg" alt="O que eu aprendi" width="100%"></p>
-
-- Como ler os cabeçalhos de um e-mail e o que cada um diz sobre a origem
-- O que SPF, DKIM e DMARC verificam e por que um sem o outro não resolve
-- A estrutura MIME, com partes de texto, HTML e anexos
-- Defang de indicadores, uma prática comum em relatório de incidente
-- Pensar em pesos em vez de regras sim ou não, porque nenhum sinal sozinho prova nada
-
-Próximos passos
-
-- [ ] Consultar a reputação dos domínios na API do VirusTotal
-- [ ] Extrair hash dos anexos para buscar em bases de malware
-- [ ] Gerar o relatório em HTML para anexar no chamado
-
-<a id="estudos"></a>
-
-<p><img src="assets/secao-06.svg" alt="Estudei por aqui" width="100%"></p>
+## Estudei por aqui
 
 Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 
@@ -129,6 +103,8 @@ Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 | [RFC 7208, SPF](https://datatracker.ietf.org/doc/html/rfc7208) | Os resultados possíveis do SPF (pass, fail, softfail) |
 | [Documentação do módulo email](https://docs.python.org/3/library/email.html) | Leitura de mensagens MIME em Python |
 
-<p align="center"><sub>Parte do <a href="https://github.com/arthurlynow098">Lince Lab</a>, minha coleção de projetos de cibersegurança</sub></p>
+## Licença
 
-<p align="center"><a href="#top">Voltar ao topo</a></p>
+Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE).
+
+<p align="center"><sub>A gravura do banner é o peixe-diabo da Encyclopaedia Britannica de 1911, em domínio público no <a href="https://commons.wikimedia.org/wiki/File%3A1911_Lophius_piscatorius.png">Wikimedia Commons</a>.</sub></p>
