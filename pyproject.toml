@@ -1,0 +1,14 @@
+[project]
+name = "phishing-analyzer"
+version = "1.0.0"
+description = "Abre um .eml e mostra os sinais de phishing com uma nota de risco"
+requires-python = ">=3.10"
+authors = [{ name = "Arthur Entsev" }]
+license = { text = "MIT" }
+
+[project.scripts]
+phishanalyzer = "phishanalyzer.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
